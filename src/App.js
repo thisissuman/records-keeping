@@ -9,42 +9,36 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [data, setData] = useState({});
   const [form, setForm] = useState([]);
 
   function getName(element) {
-    setName(element.target.value);
+    setData({ ...data, name: element.target.value });
   }
 
   function getEmail(element) {
-    setEmail(element.target.value);
+    setData({ ...data, email: element.target.value });
   }
 
   const onsubmitChangeHandeler = () => {
-    setForm([
-      ...form,
-      {
-        name: name,
-        email: email,
-      },
-    ]);
-
-    setName("");
-    setEmail("");
+    setForm([...form, data]);
   };
 
   const onClickRemoveHandeler = (index) => {
     let arr = form;
-    arr.splice(index,1)
-    setForm([...arr])
+    arr.splice(index, 1);
+    setForm([...arr]);
   };
   const Fields = form.map((element, index) => {
     return (
-      <div key={index} className="data_1">  
+      <div key={index} className="data_1">
         <h4>{element.name}</h4>
         <h4>{element.email}</h4>
-        <Button variant="contained" color="error" onClick={() => onClickRemoveHandeler(index)}>
+        <Button
+          variant="contained"
+          color="error"
+          onClick={() => onClickRemoveHandeler(index)}
+        >
           <AddCircleIcon>
             <h4>Remove</h4>
           </AddCircleIcon>
@@ -59,18 +53,18 @@ function App() {
       <div className="input">
         <Stack spacing={2} direction="row">
           <TextField
-            value={name}
+            value={data.name}
             id="outlined-basic"
             label="Name"
             variant="outlined"
-            onInput={getName}
+            onChange={getName}
           />
           <TextField
-            value={email}
+            value={data.email}
             id="outlined-basic"
             label="Email"
             variant="outlined"
-            onInput={getEmail}
+            onChange={getEmail}
           />
 
           <Button
