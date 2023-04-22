@@ -21,7 +21,7 @@ function App() {
     setEmail(element.target.value);
   }
 
-  const onsubmitChangeHandeler = (e) => {
+  const onsubmitChangeHandeler = () => {
     setForm([
       ...form,
       {
